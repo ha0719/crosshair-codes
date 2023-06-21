@@ -11,6 +11,7 @@
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
     "lodash": "^4.17.21",
+    "rc-slider": "^10.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -20,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "ts-mocha -n loader=ts-node/esm -p ./tsconfig.json src/**/*.spec.ts",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,6 +43,12 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.195"
+    "@types/assert": "^1.5.6",
+    "@types/lodash": "^4.14.195",
+    "@types/mocha": "^10.0.1",
+    "assert": "^2.0.0",
+    "mocha": "^10.2.0",
+    "tailwindcss": "^3.3.2",
+    "ts-mocha": "^10.0.0"
   }
 }
