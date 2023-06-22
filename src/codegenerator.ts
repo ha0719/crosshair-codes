@@ -115,6 +115,7 @@ export interface SniperSettings {
   [SniperCenterDotMapping.OPACITY]: number;
 }
 export interface CrosshairSettings {
+  name: string;
   override_all_primary_crosshairs_with_my_primary_crosshair: boolean;
   use_advanced_options: boolean;
   fade_crosshair_with_firing_error: boolean;
@@ -165,6 +166,7 @@ const DEFAULT_PRIMARY_SETTINGS: PrimarySettings = {
 };
 
 export const DEFAULT_SETTINGS: CrosshairSettings = {
+  name: 'Crosshair Profile',
   fade_crosshair_with_firing_error: true,
   use_advanced_options: false,
   override_all_primary_crosshairs_with_my_primary_crosshair: false,
@@ -180,9 +182,9 @@ export const DEFAULT_SETTINGS: CrosshairSettings = {
   },
 };
 
-export function generateCrosshairFromCode(code: string) {
+export function generateCrosshairFromCode(code: string, withName = false) {
   const settings: any = cloneDeep(DEFAULT_SETTINGS);
-  const parts = code.split(/(P|A|S);/g);
+  const parts = code.split(/(P|A|S|NAME);/g);
 
   if (!!parts.indexOf('P')) {
     // turn primary into key value pairs
@@ -203,6 +205,13 @@ export function generateCrosshairFromCode(code: string) {
       let value = sniperParts[i + 1];
       typeCheckThenSet(sniperSettings, key, value);
     }
+  }
+
+  if (!!parts.indexOf('NAME')) {
+    console.log(code);
+    const name = parts[parts.indexOf('NAME') + 1];
+    console.log(name);
+    settings.name = name;
   }
 
   function setPrimarySettings(type: 'primary' | 'ads', primaryCode: string[]) {
@@ -230,7 +239,6 @@ export function generateCrosshairFromCode(code: string) {
           }
         }
         typeCheckThenSet(primarySettings, key, value);
-        console.log(primarySettings, key, value);
       }
     }
   }
@@ -248,7 +256,7 @@ export function generateCrosshairFromCode(code: string) {
   return settings;
 }
 
-export function generateCrosshair(s: CrosshairSettings) {
+export function generateCrosshair(s: CrosshairSettings, withName = false) {
   if (isEqual(s, DEFAULT_SETTINGS)) {
     return '0';
   }
@@ -310,9 +318,10 @@ export function generateCrosshair(s: CrosshairSettings) {
         );
       } else {
         appendSetting(SniperCenterDotMapping.COLOR, 8);
+        const c = 'sniper[SniperCenterDotMapping.CUSTOM_COLOR]';
         appendSetting(
           SniperCenterDotMapping.CUSTOM_COLOR,
-          sniper[SniperCenterDotMapping.CUSTOM_COLOR] + 'FF'
+          c.length === 6 ? c + 'FF' : c
         );
       }
     } else {
@@ -427,10 +436,6 @@ export function generateCrosshair(s: CrosshairSettings) {
   function addCrosshairColor(x: 'primary' | 'ads') {
     const color = '#' + s[x][PrimaryMapping.CUSTOM_COLOR];
     const prefix = x === 'primary' ? '' : '';
-    // console.log(
-    //   color,
-    //   !!CROSSHAIR_COLORS[color as keyof typeof CROSSHAIR_COLORS]
-    // );
     if (!!CROSSHAIR_COLORS[color as keyof typeof CROSSHAIR_COLORS]) {
       if (color !== '#FFFFFF') {
         appendSetting(
@@ -440,9 +445,10 @@ export function generateCrosshair(s: CrosshairSettings) {
       }
     } else {
       appendSetting(prefix + PrimaryMapping.CROSSHAIR_COLOR, 8);
+      const c = s[x][PrimaryMapping.CUSTOM_COLOR] as string;
       appendSetting(
         prefix + PrimaryMapping.CUSTOM_COLOR,
-        s[x][PrimaryMapping.CUSTOM_COLOR] + 'FF'
+        c.length === 6 ? c + 'FF' : c
       );
     }
   }
@@ -500,6 +506,11 @@ export function generateCrosshair(s: CrosshairSettings) {
 
   function appendSetting(key: string, value: any) {
     code += `${key};${value};`;
+  }
+
+  if (withName) {
+    console.log(s.name);
+    code += 'NAME;' + s.name;
   }
 
   if (code.endsWith(';')) {

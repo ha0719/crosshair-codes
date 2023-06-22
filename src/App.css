@@ -79,6 +79,59 @@
 .crosshair {
   z-index: 2;
 }
+
+.icon-btn {
+  width: 52px;
+  height: 52px;
+  background: #ffffff20;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.icon-btn .tool-tip {
+  display: none;
+  position: absolute;
+  top: 52px;
+  left: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 8px;
+  width: 150px;
+  background: #00000090;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.icon-btn:hover .tool-tip:not(.copy) {
+  display: block;
+}
+.icon-btn .copy:not(.hidden) {
+  width: 300px;
+  left: -125px;
+  text-align: center;
+  display: block;
+}
+.icon-btn:hover .tool-tip.hidden {
+  display: none;
+}
+.icon-btn:hover {
+  background-color: #ffffff40;
+}
+.icon-btn:active {
+  background-color: #ffffff10;
+}
+.crosshair-profile {
+  display: flex;
+  margin-right: 24px;
+}
+.crosshair-profile .separator {
+  width: 1px;
+  height: 45px;
+  background: white;
+  margin: 8px 5px;
+}
 .link-btn a {
   background: #ffffff50;
   border-radius: 12px;

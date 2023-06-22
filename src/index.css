@@ -122,15 +122,19 @@ body {
   margin-left: 5px;
 }
 
+.no-bg .setting-row {
+  background-color: none;
+}
 .setting-row {
   color: white;
   height: 64px;
   transition: background-color 0.2s;
   user-select: none;
-  &:nth-child(even) {
+  &:nth-child(even),
+  &.odd {
     background-color: #ffffff08;
   }
-  &:hover {
+  &:not(.no-hover):hover {
     background-color: #ffffff20;
   }
   & input[type='radio'] {

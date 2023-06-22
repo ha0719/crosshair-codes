@@ -53,7 +53,7 @@ export default function SettingRowColor({
             <input
               type="text"
               style={{ textTransform: 'uppercase' }}
-              value={color}
+              value={color.length === 9 ? color.slice(0, 7) : color}
               onChange={(e) => {
                 onChange(e.target.value.replace('#', '').toUpperCase());
               }}
