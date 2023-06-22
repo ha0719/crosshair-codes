@@ -1,18 +1,21 @@
-import { useCallback } from 'react';
-import { LineMapping, PrimaryMapping } from '../codegenerator';
+import { useCallback, useId } from 'react';
+import {
+  LineMapping,
+  PrimaryMapping,
+  CrosshairSettings,
+} from '../codegenerator';
 import SettingRow from './SettingRow';
 
 export default function SettingRowBoolean({
   value,
-  setting,
   onChange = () => {},
   label,
 }: {
   value: 0 | 1;
-  setting: PrimaryMapping | LineMapping;
   onChange?: (value: 0 | 1) => void;
   label: string;
 }) {
+  const id = useId();
   const _onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange(parseInt(e.target.value) as 0 | 1);
@@ -25,7 +28,7 @@ export default function SettingRowBoolean({
       <>
         <label className={`radio ${value === 1 ? 'checked' : ''}`}>
           <input
-            name={setting}
+            name={id}
             checked={value === 1}
             type="radio"
             value="1"
@@ -37,7 +40,7 @@ export default function SettingRowBoolean({
 
         <label className={`radio ${value === 0 ? 'checked' : ''}`}>
           <input
-            name={setting}
+            name={id}
             checked={value === 0}
             type="radio"
             value="0"

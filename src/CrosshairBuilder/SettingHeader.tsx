@@ -5,9 +5,7 @@ export default function SettingHeader({
 }) {
   return (
     <div className={`setting-header flex`}>
-      <div className="setting-label flex flex-1 items-center pl-1">
-        {children}
-      </div>
+      <div className="setting-label flex flex-1 pl-1">{children}</div>
     </div>
   );
 }

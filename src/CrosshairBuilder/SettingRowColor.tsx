@@ -5,10 +5,10 @@ import { SketchPicker } from 'react-color';
 import { CROSSHAIR_COLORS, PresetColors } from '../crosshair';
 
 export default function SettingRowColor({
-  settings,
+  color,
   onChange,
 }: {
-  settings: PrimarySettings;
+  color: string;
   onChange: (color: string) => void;
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
@@ -31,7 +31,7 @@ export default function SettingRowColor({
               ></div>
               <SketchPicker
                 presetColors={Object.keys(CROSSHAIR_COLORS).map((c) => c)}
-                color={`#${settings[PrimaryMapping.CUSTOM_COLOR]}`}
+                color={color}
                 onChange={handleChange}
               />
             </div>
@@ -42,7 +42,7 @@ export default function SettingRowColor({
               setShowColorPicker(true);
             }}
             style={{
-              backgroundColor: `#${settings[PrimaryMapping.CUSTOM_COLOR]}`,
+              backgroundColor: color,
             }}
           ></div>
           <div
@@ -54,7 +54,10 @@ export default function SettingRowColor({
             <input
               type="text"
               style={{ textTransform: 'uppercase' }}
-              value={`#${settings[PrimaryMapping.CUSTOM_COLOR]}`}
+              value={color}
+              onChange={(e) => {
+                onChange(e.target.value.replace('#', '').toUpperCase());
+              }}
             />
           </div>
         </div>
@@ -65,18 +68,8 @@ export default function SettingRowColor({
               setShowColorDropdown(true);
             }}
           >
-            {CROSSHAIR_COLORS[
-              ('#' +
-                settings[
-                  PrimaryMapping.CUSTOM_COLOR
-                ]?.toUpperCase()) as PresetColors
-            ]
-              ? CROSSHAIR_COLORS[
-                  ('#' +
-                    settings[
-                      PrimaryMapping.CUSTOM_COLOR
-                    ]?.toUpperCase()) as PresetColors
-                ]
+            {CROSSHAIR_COLORS[color.toUpperCase() as PresetColors]
+              ? CROSSHAIR_COLORS[color.toUpperCase() as PresetColors]
               : 'Custom'}
           </div>
 
@@ -90,6 +83,7 @@ export default function SettingRowColor({
                 key={key}
                 onClick={() => {
                   onChange(key.replace('#', ''));
+                  setShowColorDropdown(false);
                 }}
               >
                 <span className="mini-color" style={{ backgroundColor: key }} />

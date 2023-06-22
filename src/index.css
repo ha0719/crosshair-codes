@@ -21,10 +21,34 @@ code {
 .setting-header {
   text-transform: uppercase;
   color: white;
-  margin-top: 20px;
   font-weight: bold;
+  margin-top: 20px;
   letter-spacing: 1px;
-  height: 64px;
+  padding-bottom: 20px;
+}
+
+.general-crosshair-wrapper {
+  position: relative;
+}
+
+.general-crosshair-wrapper .crosshair-title {
+  position: absolute;
+  top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.crosshair-title span {
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: #00000080;
+  color: white;
+  text-transform: uppercase;
+  padding: 4px 8px;
+}
+
+body {
+  user-select: none; /* Standard syntax */
 }
 
 .color-text-display {

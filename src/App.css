@@ -1,3 +1,7 @@
+:root {
+  --text-color: #c0ccd2;
+  --text-active-color: #eaeeb3;
+}
 .bg {
   background-image: url('./background.jpg');
   background-repeat: no-repeat;
@@ -28,12 +32,118 @@
   width: 100%;
   max-width: 1334px;
 }
+.x-tabs {
+  color: ;
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  align-items: center;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+.x-tabs li {
+  padding: 10px;
+  font-weight: 600;
+  margin: 0 40px;
+}
+.x-tabs a {
+  padding: 0 20px;
+  color: var(--text-color);
+}
+.x-tabs a:hover {
+  color: white;
+}
+.x-tabs li.selected a {
+  color: var(--text-active-color);
+}
+.scrollbar {
+  position: relative;
+  height: calc(90vh - 366px);
+  overflow: auto;
+  padding-right: 20px;
+  margin-top: 20px;
+}
 
+.disabled-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 260%;
+  width: calc(100% - 10px);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+}
+
+.crosshair {
+  z-index: 2;
+}
+.link-btn a {
+  background: #ffffff50;
+  border-radius: 12px;
+  margin: 0 20px;
+  vertical-align: middle;
+  width: 40px;
+  text-align: center;
+  display: inline-block;
+}
+.sniper-overlay .x {
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  left: 0;
+  top: calc(50% - 1px);
+}
+.sniper-overlay .y {
+  width: 2px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: calc(50% - 1px);
+}
+.sniper-overlay .bar {
+  height: 10px;
+  width: 140px;
+  top: calc(50% - 5px);
+  background: black;
+  position: absolute;
+}
+
+.sniper-overlay .bar.left {
+  left: 0;
+}
+.sniper-overlay .bar.right {
+  right: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #ffffff40;
+  padding: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 10px;
+}
+.selected-color {
+  background: #ffffff10;
+}
 .navbar {
   height: 60px;
   border-bottom: 1px solid #ffffff40;
   margin-bottom: 20px;
-  color: white;
+  color: var(--text-color);
   & ul {
     display: flex;
     justify-content: center;
@@ -45,7 +155,7 @@
       position: relative;
       cursor: pointer;
       &.selected a {
-        color: #eaeeb2;
+        color: var(--text-active-color);
       }
       & a {
         color: white;

@@ -68,7 +68,6 @@ export default function CrosshairDisplay({
 }: {
   settings: PrimarySettings;
 }) {
-  console.log(settings);
   const crosshairColor = '#' + settings[PrimaryMapping.CUSTOM_COLOR];
   // const crosshairColor =
   //   settings[PrimaryMapping.CROSSHAIR_COLOR] === 8
@@ -105,8 +104,14 @@ export default function CrosshairDisplay({
   const inner_line_left_y = inner_line_vertical_y;
   const inner_line_right_y = inner_line_vertical_y;
 
-  const inner_line_top_y =
-    -inner_line_gap - settings.inner_lines[LineMapping.LENGTH];
+  const inner_line_vertical_length = settings.inner_lines[LineMapping.LENGTH];
+  const inner_line_horizontal_length = settings.inner_lines[
+    LineMapping.LENGTH_NOT_LINKED
+  ]
+    ? settings.inner_lines[LineMapping.VERTICAL]
+    : inner_line_vertical_length;
+
+  const inner_line_top_y = -inner_line_gap - inner_line_horizontal_length;
   const inner_line_bottom_y = inner_line_gap;
 
   const inner_line_horizontal_x = -(
@@ -125,9 +130,15 @@ export default function CrosshairDisplay({
   const outer_line_left_y = outer_line_vertical_y;
   const outer_line_right_y = outer_line_vertical_y;
 
-  const outer_line_top_y =
-    -outer_line_gap - settings.outer_lines[LineMapping.LENGTH];
   const outer_line_bottom_y = outer_line_gap;
+
+  const outer_line_vertical_length = settings.outer_lines[LineMapping.LENGTH];
+  const outer_line_horizontal_length = settings.outer_lines[
+    LineMapping.LENGTH_NOT_LINKED
+  ]
+    ? settings.outer_lines[LineMapping.VERTICAL]
+    : outer_line_vertical_length;
+  const outer_line_top_y = -outer_line_gap - outer_line_horizontal_length;
 
   const center_dot_offset = Math.floor(
     settings[PrimaryMapping.CENTER_DOT_THICKNESS] / 2
@@ -135,14 +146,7 @@ export default function CrosshairDisplay({
 
   return (
     <div className="crosshair grid place-items-center">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={200}
-        height={200}
-        // viewBox="0 0 170 170"
-        // style={{ background: `rgba(255, 0, 0, 0.05)` }}
-        // viewBox="0 0 128 128"k
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width={200} height={200}>
         <filter id="constantOpacity2">
           <feComponentTransfer>
             <feFuncA
@@ -181,7 +185,7 @@ export default function CrosshairDisplay({
                 <RectWithStroke
                   x={inner_line_left_x}
                   y={inner_line_left_y}
-                  width={settings.inner_lines[LineMapping.LENGTH]}
+                  width={inner_line_vertical_length}
                   height={settings.inner_lines[LineMapping.THICKNESS]}
                   strokeWidth={strokeWidth}
                   opacity={settings.inner_lines[LineMapping.OPACITY]}
@@ -192,7 +196,7 @@ export default function CrosshairDisplay({
                 <RectWithStroke
                   x={inner_line_right_x}
                   y={inner_line_right_y}
-                  width={settings.inner_lines[LineMapping.LENGTH]}
+                  width={inner_line_vertical_length}
                   height={settings.inner_lines[LineMapping.THICKNESS]}
                   strokeWidth={strokeWidth}
                   opacity={settings.inner_lines[LineMapping.OPACITY]}
@@ -206,7 +210,7 @@ export default function CrosshairDisplay({
                   x={inner_line_horizontal_x}
                   y={inner_line_top_y}
                   width={settings.inner_lines[LineMapping.THICKNESS]}
-                  height={settings.inner_lines[LineMapping.LENGTH]}
+                  height={inner_line_horizontal_length}
                   strokeWidth={strokeWidth}
                   opacity={settings.inner_lines[LineMapping.OPACITY]}
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
@@ -217,7 +221,7 @@ export default function CrosshairDisplay({
                   x={inner_line_horizontal_x}
                   y={inner_line_bottom_y}
                   width={settings.inner_lines[LineMapping.THICKNESS]}
-                  height={settings.inner_lines[LineMapping.LENGTH]}
+                  height={inner_line_horizontal_length}
                   strokeWidth={strokeWidth}
                   opacity={settings.inner_lines[LineMapping.OPACITY]}
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
@@ -235,7 +239,7 @@ export default function CrosshairDisplay({
                 <RectWithStroke
                   x={outer_line_left_x}
                   y={outer_line_left_y}
-                  width={settings.outer_lines[LineMapping.LENGTH]}
+                  width={outer_line_vertical_length}
                   height={settings.outer_lines[LineMapping.THICKNESS]}
                   strokeWidth={strokeWidth}
                   opacity={settings.outer_lines[LineMapping.OPACITY]}
@@ -246,7 +250,7 @@ export default function CrosshairDisplay({
                 <RectWithStroke
                   x={outer_line_right_x}
                   y={outer_line_right_y}
-                  width={settings.outer_lines[LineMapping.LENGTH]}
+                  width={outer_line_vertical_length}
                   height={settings.outer_lines[LineMapping.THICKNESS]}
                   strokeWidth={strokeWidth}
                   opacity={settings.outer_lines[LineMapping.OPACITY]}
@@ -260,7 +264,7 @@ export default function CrosshairDisplay({
                   x={outer_line_horizontal_x}
                   y={outer_line_top_y}
                   width={settings.outer_lines[LineMapping.THICKNESS]}
-                  height={settings.outer_lines[LineMapping.LENGTH]}
+                  height={outer_line_horizontal_length}
                   strokeWidth={strokeWidth}
                   opacity={settings.outer_lines[LineMapping.OPACITY]}
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
@@ -271,7 +275,7 @@ export default function CrosshairDisplay({
                   x={outer_line_horizontal_x}
                   y={outer_line_bottom_y}
                   width={settings.outer_lines[LineMapping.THICKNESS]}
-                  height={settings.outer_lines[LineMapping.LENGTH]}
+                  height={outer_line_horizontal_length}
                   strokeWidth={strokeWidth}
                   opacity={settings.outer_lines[LineMapping.OPACITY]}
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}

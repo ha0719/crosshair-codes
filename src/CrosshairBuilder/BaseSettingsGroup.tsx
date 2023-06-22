@@ -6,25 +6,19 @@ import SettingRowSlider from './SettingRowSlider';
 import { PrimaryMapping, PrimarySettings, labelMap } from '../codegenerator';
 
 export default function BaseSettingsGroup({
-  settings: _settings,
+  settings,
   onChange,
 }: {
   settings: PrimarySettings;
   onChange: (value: PrimarySettings) => void;
 }) {
-  const [settings, setSettings] = useState({ ..._settings });
-
-  useEffect(() => {
-    onChange(settings);
-  }, [settings]);
-
   return (
     <div className="mb-10">
       <SettingHeader>Crosshair</SettingHeader>
       <SettingRowColor
-        settings={settings}
+        color={`#${settings[PrimaryMapping.CUSTOM_COLOR]}`}
         onChange={(color) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.CUSTOM_COLOR]: color,
           });
@@ -33,9 +27,8 @@ export default function BaseSettingsGroup({
       <SettingRowBoolean
         label={labelMap[PrimaryMapping.OUTLINES]}
         value={+settings[PrimaryMapping.OUTLINES] as 0 | 1}
-        setting={PrimaryMapping.OUTLINES}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.OUTLINES]: !!value,
           });
@@ -44,9 +37,8 @@ export default function BaseSettingsGroup({
       <SettingRowSlider
         label={labelMap[PrimaryMapping.OUTLINE_OPACITY]}
         value={+settings[PrimaryMapping.OUTLINE_OPACITY]}
-        setting={PrimaryMapping.OUTLINE_OPACITY}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.OUTLINE_OPACITY]: value,
           });
@@ -58,9 +50,8 @@ export default function BaseSettingsGroup({
         step={1}
         label={labelMap[PrimaryMapping.OUTLINE_THICKNESS]}
         value={+settings[PrimaryMapping.OUTLINE_THICKNESS]}
-        setting={PrimaryMapping.OUTLINE_THICKNESS}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.OUTLINE_THICKNESS]: value,
           });
@@ -69,9 +60,8 @@ export default function BaseSettingsGroup({
       <SettingRowBoolean
         label={labelMap[PrimaryMapping.CENTER_DOT]}
         value={+settings[PrimaryMapping.CENTER_DOT] as 0 | 1}
-        setting={PrimaryMapping.CENTER_DOT}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.CENTER_DOT]: !!value,
           });
@@ -81,9 +71,8 @@ export default function BaseSettingsGroup({
       <SettingRowSlider
         label={labelMap[PrimaryMapping.CENTER_DOT_OPACITY]}
         value={+settings[PrimaryMapping.CENTER_DOT_OPACITY]}
-        setting={PrimaryMapping.CENTER_DOT_OPACITY}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.CENTER_DOT_OPACITY]: value,
           });
@@ -95,9 +84,8 @@ export default function BaseSettingsGroup({
         step={1}
         label={labelMap[PrimaryMapping.CENTER_DOT_THICKNESS]}
         value={+settings[PrimaryMapping.CENTER_DOT_THICKNESS]}
-        setting={PrimaryMapping.CENTER_DOT_THICKNESS}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.CENTER_DOT_THICKNESS]: value,
           });
@@ -114,11 +102,8 @@ export default function BaseSettingsGroup({
             PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET
           ] as 0 | 1
         }
-        setting={
-          PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET
-        }
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET]:
               !!value,
@@ -132,11 +117,8 @@ export default function BaseSettingsGroup({
             PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET
           ] as 0 | 1
         }
-        setting={
-          PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET
-        }
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET]:
               !!value,

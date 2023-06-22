@@ -1,11 +1,9 @@
-import { LineMapping, PrimaryMapping } from '../codegenerator';
 import SettingRow from './SettingRow';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 export default function SettingRowSlider({
   value,
-  setting,
   onChange = () => {},
   min = 0,
   max = 1,
@@ -13,7 +11,6 @@ export default function SettingRowSlider({
   label,
 }: {
   value: number;
-  setting: PrimaryMapping | LineMapping;
   onChange?: (value: number) => void;
   min?: number;
   max?: number;
@@ -28,7 +25,7 @@ export default function SettingRowSlider({
           max={min}
           min={max}
           value={value}
-          className="w-24"
+          className="w-32"
           onChange={(e) => onChange(+e.target.value)}
         />
         {/* <div className="flex w-20 items-center justify-center">{value}</div> */}
