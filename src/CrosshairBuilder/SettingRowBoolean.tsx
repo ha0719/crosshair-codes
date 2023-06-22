@@ -1,9 +1,4 @@
 import { useCallback, useId } from 'react';
-import {
-  LineMapping,
-  PrimaryMapping,
-  CrosshairSettings,
-} from '../codegenerator';
 import SettingRow from './SettingRow';
 
 export default function SettingRowBoolean({

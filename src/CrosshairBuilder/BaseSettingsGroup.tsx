@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import SettingHeader from './SettingHeader';
 import SettingRowColor from './SettingRowColor';
 import SettingRowBoolean from './SettingRowBoolean';

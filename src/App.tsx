@@ -1,7 +1,6 @@
 import './App.css';
 import cloneDeep from 'lodash/cloneDeep';
 import {
-  CrosshairSettings,
   DEFAULT_SETTINGS,
   PrimarySettings,
   SniperCenterDotMapping,
@@ -10,7 +9,7 @@ import {
   generateCrosshairFromCode,
 } from './codegenerator';
 
-import { useEffect, useReducer, useState } from 'react';
+import { useState } from 'react';
 import CrosshairDisplay from './CrosshairDisplay';
 import { Navbar } from './Navbar';
 import LineSettingsGroup from './CrosshairBuilder/LineSettingsGroup';
@@ -20,7 +19,6 @@ import SettingRowBoolean from './CrosshairBuilder/SettingRowBoolean';
 import SettingHeader from './CrosshairBuilder/SettingHeader';
 import SettingRowColor from './CrosshairBuilder/SettingRowColor';
 import SettingRowSlider from './CrosshairBuilder/SettingRowSlider';
-import _ from 'lodash';
 import SettingRow from './CrosshairBuilder/SettingRow';
 
 function PrimarySettingsGroup({

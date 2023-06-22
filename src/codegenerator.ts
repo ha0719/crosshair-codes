@@ -321,7 +321,6 @@ export function generateCrosshair(s: CrosshairSettings) {
   }
 
   function addLineSettings(x: 'primary' | 'ads', isOuter = false) {
-    const isInner = !isOuter;
     const prefix = String(+isOuter);
     const lineSettings = s[x][isOuter ? 'outer_lines' : 'inner_lines'];
     const defaultLineSettings =

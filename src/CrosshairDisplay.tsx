@@ -1,5 +1,4 @@
 import { PrimarySettings, LineMapping, PrimaryMapping } from './codegenerator';
-import { CROSSHAIR_COLORS } from './crosshair';
 
 export function RectWithStroke({
   x,

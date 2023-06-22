@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { PrimaryMapping, PrimarySettings } from '../codegenerator';
 import SettingRow from './SettingRow';
 import { SketchPicker } from 'react-color';
 import { CROSSHAIR_COLORS, PresetColors } from '../crosshair';
