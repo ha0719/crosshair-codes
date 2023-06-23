@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
   LineMapping,
   LineSettings,
@@ -19,13 +18,11 @@ export default function LineSettingsGroup({
   label: string;
   onChange: (value: LineSettings) => void;
 }) {
-  const [settings, setSettings] = useState({ ...lineSettings });
+  const settings = { ...lineSettings };
+  // const [settings, setSettings] = useState(() => ({ ...lineSettings }));
   const labelMap =
     label === 'Inner Lines' ? innerlineLabelMap : outerlineLabelMap;
 
-  useEffect(() => {
-    onChange(settings);
-  }, [settings]);
   return (
     <div className="mt-10">
       <SettingHeader>{label}</SettingHeader>
@@ -34,7 +31,7 @@ export default function LineSettingsGroup({
         label={labelMap[LineMapping.SHOW]}
         value={+settings[LineMapping.SHOW] as 0 | 1}
         onChange={(value) => {
-          setSettings({ ...settings, [LineMapping.SHOW]: !!value });
+          onChange({ ...settings, [LineMapping.SHOW]: !!value });
         }}
       />
 
@@ -42,7 +39,7 @@ export default function LineSettingsGroup({
         label={labelMap[LineMapping.OPACITY]}
         value={+settings[LineMapping.OPACITY]}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [LineMapping.OPACITY]: value,
           });
@@ -56,7 +53,7 @@ export default function LineSettingsGroup({
           linked: !settings[LineMapping.LENGTH_NOT_LINKED],
         }}
         onChange={({ vertical, length, linked }) => {
-          setSettings({
+          onChange({
             ...settings,
             [LineMapping.LENGTH]: length,
             [LineMapping.VERTICAL]: vertical,
@@ -82,7 +79,7 @@ export default function LineSettingsGroup({
         step={1}
         max={10}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [LineMapping.THICKNESS]: value,
           });
@@ -94,7 +91,7 @@ export default function LineSettingsGroup({
         step={1}
         max={20}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [LineMapping.OFFSET]: value,
           });
@@ -104,7 +101,7 @@ export default function LineSettingsGroup({
         label={labelMap[LineMapping.MOVEMENT_ERROR]}
         value={+settings[LineMapping.MOVEMENT_ERROR] as 0 | 1}
         onChange={(value) => {
-          setSettings({ ...settings, [LineMapping.MOVEMENT_ERROR]: !!value });
+          onChange({ ...settings, [LineMapping.MOVEMENT_ERROR]: !!value });
         }}
       />
 
@@ -113,7 +110,7 @@ export default function LineSettingsGroup({
         value={+settings[LineMapping.MOVEMENT_ERROR_MULTIPLIER]}
         max={3}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [LineMapping.MOVEMENT_ERROR_MULTIPLIER]: value,
           });
@@ -123,7 +120,7 @@ export default function LineSettingsGroup({
         label={labelMap[LineMapping.FIRING_ERROR]}
         value={+settings[LineMapping.FIRING_ERROR] as 0 | 1}
         onChange={(value) => {
-          setSettings({ ...settings, [LineMapping.FIRING_ERROR]: !!value });
+          onChange({ ...settings, [LineMapping.FIRING_ERROR]: !!value });
         }}
       />
       <SettingRowSlider
@@ -131,7 +128,7 @@ export default function LineSettingsGroup({
         value={+settings[LineMapping.FIRING_ERROR_MULTIPLIER]}
         max={3}
         onChange={(value) => {
-          setSettings({
+          onChange({
             ...settings,
             [LineMapping.FIRING_ERROR_MULTIPLIER]: value,
           });

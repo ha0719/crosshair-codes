@@ -1,16 +1,24 @@
-export function Navbar() {
+export function Navbar({
+  selectedTab,
+  setSelectedTab,
+}: {
+  selectedTab: number;
+  setSelectedTab: (tab: number) => void;
+}) {
   return (
     <div className="navbar">
       <ul>
-        <li className="selected">
-          <a href="#">Editor</a>
-        </li>
-        <li>
-          <a href="#">Browse</a>
-        </li>
-        <li>
-          <a href="#">Github</a>
-        </li>
+        {['Editor', 'Browse'].map((n, i) => {
+          return (
+            <li
+              onClick={() => setSelectedTab(i)}
+              key={n}
+              className={selectedTab === i ? 'selected' : ''}
+            >
+              <a href="#">{n}</a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

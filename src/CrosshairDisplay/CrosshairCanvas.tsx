@@ -157,56 +157,64 @@ export default function CrosshairCanvas({
           settings.inner_lines[LineMapping.THICKNESS] > 0 ? (
             <Group name="inner-line">
               <Group name="inner-line-vertical">
-                <RectWithStroke
-                  x={inner_line_left_x}
-                  y={inner_line_left_y}
-                  width={inner_line_vertical_length}
-                  height={settings.inner_lines[LineMapping.THICKNESS]}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.inner_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="inner-line-left"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                  fill={crosshairColor}
-                />
-                <RectWithStroke
-                  x={inner_line_right_x}
-                  y={inner_line_right_y}
-                  width={inner_line_vertical_length}
-                  height={settings.inner_lines[LineMapping.THICKNESS]}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.inner_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="inner-line-right"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                  fill={crosshairColor}
-                />
+                {inner_line_vertical_length > 0 ? (
+                  <RectWithStroke
+                    x={inner_line_left_x}
+                    y={inner_line_left_y}
+                    width={inner_line_vertical_length}
+                    height={settings.inner_lines[LineMapping.THICKNESS]}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.inner_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="inner-line-left"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                    fill={crosshairColor}
+                  />
+                ) : null}
+                {inner_line_vertical_length > 0 ? (
+                  <RectWithStroke
+                    x={inner_line_right_x}
+                    y={inner_line_right_y}
+                    width={inner_line_vertical_length}
+                    height={settings.inner_lines[LineMapping.THICKNESS]}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.inner_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="inner-line-right"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                    fill={crosshairColor}
+                  />
+                ) : null}
               </Group>
               <Group name="inner-line-horizontal">
-                <RectWithStroke
-                  x={inner_line_horizontal_x}
-                  y={inner_line_top_y}
-                  width={settings.inner_lines[LineMapping.THICKNESS]}
-                  height={inner_line_horizontal_length}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.inner_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="inner-line-top"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                  fill={crosshairColor}
-                />
-                <RectWithStroke
-                  x={inner_line_horizontal_x}
-                  y={inner_line_bottom_y}
-                  width={settings.inner_lines[LineMapping.THICKNESS]}
-                  height={inner_line_horizontal_length}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.inner_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="inner-line-bottom"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                  fill={crosshairColor}
-                />
+                {inner_line_horizontal_length > 0 ? (
+                  <RectWithStroke
+                    x={inner_line_horizontal_x}
+                    y={inner_line_top_y}
+                    width={settings.inner_lines[LineMapping.THICKNESS]}
+                    height={inner_line_horizontal_length}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.inner_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="inner-line-top"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                    fill={crosshairColor}
+                  />
+                ) : null}
+                {inner_line_horizontal_length > 0 ? (
+                  <RectWithStroke
+                    x={inner_line_horizontal_x}
+                    y={inner_line_bottom_y}
+                    width={settings.inner_lines[LineMapping.THICKNESS]}
+                    height={inner_line_horizontal_length}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.inner_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="inner-line-bottom"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                    fill={crosshairColor}
+                  />
+                ) : null}
               </Group>
             </Group>
           ) : null}
@@ -215,56 +223,65 @@ export default function CrosshairCanvas({
           settings.outer_lines[LineMapping.THICKNESS] > 0 ? (
             <Group name="outer-line">
               <Group name="outer-line-vertical">
-                <RectWithStroke
-                  fill={crosshairColor}
-                  x={outer_line_left_x}
-                  y={outer_line_left_y}
-                  width={outer_line_vertical_length}
-                  height={settings.outer_lines[LineMapping.THICKNESS]}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.outer_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="outer-line-left"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                />
-                <RectWithStroke
-                  fill={crosshairColor}
-                  x={outer_line_right_x}
-                  y={outer_line_right_y}
-                  width={outer_line_vertical_length}
-                  height={settings.outer_lines[LineMapping.THICKNESS]}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.outer_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="outer-line-right"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                />
+                {outer_line_vertical_length > 0 ? (
+                  <RectWithStroke
+                    fill={crosshairColor}
+                    x={outer_line_left_x}
+                    y={outer_line_left_y}
+                    width={outer_line_vertical_length}
+                    height={settings.outer_lines[LineMapping.THICKNESS]}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.outer_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="outer-line-left"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                  />
+                ) : null}
+                {outer_line_vertical_length > 0 ? (
+                  <RectWithStroke
+                    fill={crosshairColor}
+                    x={outer_line_right_x}
+                    y={outer_line_right_y}
+                    width={outer_line_vertical_length}
+                    height={settings.outer_lines[LineMapping.THICKNESS]}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.outer_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="outer-line-right"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                  />
+                ) : null}
               </Group>
               <g name="outer-line-horizontal">
-                <RectWithStroke
-                  fill={crosshairColor}
-                  x={outer_line_horizontal_x}
-                  y={outer_line_top_y}
-                  width={settings.outer_lines[LineMapping.THICKNESS]}
-                  height={outer_line_horizontal_length}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.outer_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="outer-line-top"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                />
-                <RectWithStroke
-                  fill={crosshairColor}
-                  x={outer_line_horizontal_x}
-                  y={outer_line_bottom_y}
-                  width={settings.outer_lines[LineMapping.THICKNESS]}
-                  height={outer_line_horizontal_length}
-                  strokeWidth={strokeWidth}
-                  opacity={settings.outer_lines[LineMapping.OPACITY]}
-                  strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-                  name="outer-line-bottom"
-                  stroke={settings[PrimaryMapping.OUTLINES]}
-                />
+                {outer_line_horizontal_length > 0 ? (
+                  <RectWithStroke
+                    fill={crosshairColor}
+                    x={outer_line_horizontal_x}
+                    y={outer_line_top_y}
+                    width={settings.outer_lines[LineMapping.THICKNESS]}
+                    height={outer_line_horizontal_length}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.outer_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="outer-line-top"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                  />
+                ) : null}
+
+                {outer_line_horizontal_length > 0 ? (
+                  <RectWithStroke
+                    fill={crosshairColor}
+                    x={outer_line_horizontal_x}
+                    y={outer_line_bottom_y}
+                    width={settings.outer_lines[LineMapping.THICKNESS]}
+                    height={outer_line_horizontal_length}
+                    strokeWidth={strokeWidth}
+                    opacity={settings.outer_lines[LineMapping.OPACITY]}
+                    strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
+                    name="outer-line-bottom"
+                    stroke={settings[PrimaryMapping.OUTLINES]}
+                  />
+                ) : null}
               </g>
             </Group>
           ) : null}

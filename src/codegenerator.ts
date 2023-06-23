@@ -182,9 +182,10 @@ export const DEFAULT_SETTINGS: CrosshairSettings = {
   },
 };
 
-export function generateCrosshairFromCode(code: string, withName = false) {
+export function generateCrosshairFromCode(code: string) {
   const settings: any = cloneDeep(DEFAULT_SETTINGS);
   const parts = code.split(/(P|A|S|NAME);/g);
+  console.log(settings);
 
   if (!!parts.indexOf('P')) {
     // turn primary into key value pairs
@@ -207,9 +208,9 @@ export function generateCrosshairFromCode(code: string, withName = false) {
     }
   }
 
-  if (!!parts.indexOf('NAME')) {
+  if (parts.indexOf('NAME') >= 0) {
     const name = parts[parts.indexOf('NAME') + 1];
-    settings.name = name;
+    settings.name = name.replace(/^"|"$/g, '');
   }
 
   function setPrimarySettings(type: 'primary' | 'ads', primaryCode: string[]) {
@@ -257,9 +258,8 @@ export function generateCrosshairFromCode(code: string, withName = false) {
 export function generateCrosshair(s: CrosshairSettings, withName = false) {
   if (isEqual(s, DEFAULT_SETTINGS)) {
     if (withName) {
-      return '0;NAME;' + s.name;
+      return '0;NAME;"' + s.name + '"';
     }
-
     return '0';
   }
 
@@ -511,7 +511,7 @@ export function generateCrosshair(s: CrosshairSettings, withName = false) {
   }
 
   if (withName) {
-    code += 'NAME;' + s.name;
+    code += 'NAME;"' + s.name + '"';
   }
 
   if (code.endsWith(';')) {

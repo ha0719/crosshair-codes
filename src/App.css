@@ -273,6 +273,15 @@
   backdrop-filter: blur(6px);
   padding: 18px !important;
 }
+.duplicate-text {
+  color: #73b1a5;
+}
+.modal-text {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 .sketch-picker label {
   color: white !important;
   font-weight: bold;
@@ -446,4 +455,56 @@
       }
     }
   }
+}
+
+.overlay-for-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease;
+}
+.overlay-for-input:hover {
+  background: #ffffff10;
+}
+.profile-dropdown {
+  position: absolute;
+  z-index: 2;
+  top: 60px;
+  background-color: #ccc;
+  width: 100%;
+  color: black;
+  font-weight: bold;
+}
+.overlay-for-dropdown {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.profile-dropdown li {
+  padding: 2px;
+  z-index: 2;
+}
+.profile-dropdown li:nth-child(even) {
+  background-color: #bfbfbf;
+}
+
+.profile-dropdown li.active {
+  background-color: #dee2a9 !important;
+}
+.profile-dropdown li:hover {
+  background-color: #d3d7a1 !important;
+}
+
+.crosshair-form .profile-input[type='text'] {
+  width: 100%;
+  text-align: left;
+  padding-left: 10px;
+}
+.delete-text {
+  color: #f15b56;
 }

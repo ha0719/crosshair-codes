@@ -33,6 +33,7 @@ export default function ImportModal({
           type="confirm"
           onClick={() => {
             onConfirm(profileCode);
+            setProfileCode('');
             // todo: confirmation modal
           }}
         >
