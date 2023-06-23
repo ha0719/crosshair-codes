@@ -1,3 +1,5 @@
+import GitHubButton from 'react-github-btn';
+
 export function Navbar({
   selectedTab,
   setSelectedTab,
@@ -19,6 +21,18 @@ export function Navbar({
             </li>
           );
         })}
+        <li>
+          <GitHubButton
+            href="https://github.com/genesy/crosshair-codes"
+            data-color-scheme="no-preference: dark; light: dark; dark: dark;"
+            data-icon="octicon-star"
+            data-size="large"
+            data-show-count="true"
+            aria-label="Star genesy/crosshair-codes on GitHub"
+          >
+            Star
+          </GitHubButton>
+        </li>
       </ul>
     </div>
   );

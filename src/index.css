@@ -54,9 +54,9 @@ body {
 .color-text-display {
   display: flex;
   flex: 1;
-  & input {
-    width: 100%;
-  }
+}
+.color-text-display input {
+  width: 100%;
 }
 .color-display {
   width: 70px;
@@ -130,47 +130,50 @@ body {
   height: 64px;
   transition: background-color 0.2s;
   user-select: none;
-  &:nth-child(even),
-  &.odd {
-    background-color: #ffffff08;
+}
+
+.setting-row:nth-child(even),
+.setting-row.odd {
+  background-color: #ffffff08;
+}
+.setting-row:not(.no-hover):hover {
+  background-color: #ffffff20;
+}
+.setting-row input[type='radio'] {
+  display: none;
+}
+
+.setting-row input[type='number'],
+.setting-row input[type='text'] {
+  background: transparent;
+  text-align: center;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
-  &:not(.no-hover):hover {
+}
+
+.setting-row .radio {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  background-color: #ffffff05;
+  transition: background-color 0.2s;
+  &.checked {
     background-color: #ffffff20;
-  }
-  & input[type='radio'] {
-    display: none;
-  }
-  & input[type='number'],
-  & input[type='text'] {
-    background: transparent;
-    text-align: center;
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-  .radio {
-    flex: 1;
-    display: grid;
-    place-items: center;
-    background-color: #ffffff05;
-    transition: background-color 0.2s;
-    &.checked {
-      background-color: #ffffff20;
-      &:hover {
-        background-color: #ffffff22;
-        cursor: default;
-      }
-    }
     &:hover {
-      background-color: #ffffff20;
-      cursor: pointer;
+      background-color: #ffffff22;
+      cursor: default;
     }
   }
-  .setting-value {
-    background-color: #ffffff12;
+  &:hover {
+    background-color: #ffffff20;
+    cursor: pointer;
   }
+}
+.setting-value {
+  background-color: #ffffff12;
 }
 
 .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
