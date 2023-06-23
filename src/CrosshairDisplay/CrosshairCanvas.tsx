@@ -1,6 +1,12 @@
-import { PrimarySettings, LineMapping, PrimaryMapping } from './codegenerator';
+import { Circle, Group, Stage, Rect, Layer } from 'react-konva';
+import Konva from 'konva';
+import { PrimarySettings, LineMapping, PrimaryMapping } from '../codegenerator';
 
-export function RectWithStroke({
+// function Group({ children, name, ...props }: any) {
+//   return children;
+// }
+
+function RectWithStroke({
   x,
   y,
   width,
@@ -10,6 +16,7 @@ export function RectWithStroke({
   strokeOpacity,
   name,
   stroke = true,
+  fill,
 }: {
   x: number;
   y: number;
@@ -20,150 +27,118 @@ export function RectWithStroke({
   strokeOpacity?: number;
   name?: string;
   stroke?: boolean;
+  fill: string;
 }) {
   return (
-    <g name={name}>
+    <Group name={name}>
       {stroke ? (
-        <g filter="url(#constantOpacity)">
-          <g fill="black" opacity={strokeOpacity} shapeRendering="crispEdges">
-            <rect
+        <Group filter="url(#constantOpacity)">
+          <Group opacity={strokeOpacity}>
+            <Rect
               x={x - strokeWidth}
               y={y - strokeWidth}
               width={strokeWidth}
               height={height + strokeWidth * 2}
               name="left"
+              fill="black"
             />
-            <rect
+            <Rect
               x={x + width}
               y={y - strokeWidth}
               width={strokeWidth}
               height={height + strokeWidth * 2}
               name="right"
+              fill="black"
             />
-            <rect
+            <Rect
               x={x}
               y={y - strokeWidth}
               height={strokeWidth}
               width={width}
               name="top"
+              fill="black"
             />
-            <rect
+            <Rect
               x={x}
               y={y + height}
               height={strokeWidth}
               width={width}
               name="bottom"
+              fill="black"
             />
-          </g>
-        </g>
+          </Group>
+        </Group>
       ) : null}
-      <rect x={x} y={y} width={width} height={height} opacity={opacity} />
-    </g>
+      <Rect
+        fill={fill}
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        opacity={opacity}
+      />
+    </Group>
   );
 }
 
-export default function CrosshairDisplay({
+export default function CrosshairCanvas({
   settings,
+  crosshairColor,
+  center_dot_offset,
+  strokeWidth,
+  inner_line_left_x,
+  inner_line_right_x,
+  inner_line_left_y,
+  inner_line_right_y,
+  inner_line_vertical_length,
+  inner_line_horizontal_length,
+  inner_line_top_y,
+  inner_line_bottom_y,
+  inner_line_horizontal_x,
+  outer_line_left_x,
+  outer_line_right_x,
+  outer_line_left_y,
+  outer_line_right_y,
+  outer_line_vertical_length,
+  outer_line_horizontal_length,
+  outer_line_top_y,
+  outer_line_bottom_y,
+  outer_line_horizontal_x,
 }: {
-  settings: PrimarySettings;
+  settings: any;
+  crosshairColor: string;
+  center_dot_offset: number;
+  strokeWidth: number;
+  inner_line_left_x: number;
+  inner_line_right_x: number;
+  inner_line_left_y: number;
+  inner_line_right_y: number;
+  inner_line_vertical_length: number;
+  inner_line_horizontal_length: number;
+  inner_line_top_y: number;
+  inner_line_bottom_y: number;
+  inner_line_horizontal_x: number;
+  outer_line_left_x: number;
+  outer_line_right_x: number;
+  outer_line_left_y: number;
+  outer_line_right_y: number;
+  outer_line_bottom_y: number;
+  outer_line_vertical_length: number;
+  outer_line_horizontal_length: number;
+  outer_line_top_y: number;
+  outer_line_horizontal_x: number;
 }) {
-  const crosshairColor = '#' + settings[PrimaryMapping.CUSTOM_COLOR];
-  // const crosshairColor =
-  //   settings[PrimaryMapping.CROSSHAIR_COLOR] === 8
-  //     ? settings[PrimaryMapping.CUSTOM_COLOR]
-  //     : 'pink';
-  // : CROSSHAIR_COLORS[settings[PrimaryMapping.CROSSHAIR_COLOR]];
-
-  const strokeWidth = settings[PrimaryMapping.OUTLINE_THICKNESS];
-
-  const inner_line_gap =
-    settings.inner_lines[LineMapping.OFFSET] +
-    (settings.inner_lines[LineMapping.FIRING_ERROR]
-      ? settings[
-          PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET
-        ]
-        ? 0
-        : 4
-      : 0);
-  const outer_line_gap =
-    settings.outer_lines[LineMapping.OFFSET] +
-    (settings.outer_lines[LineMapping.FIRING_ERROR]
-      ? settings[
-          PrimaryMapping.OVERRIDE_FIRING_ERROR_OFFSET_WITH_CROSSHAIR_OFFSET
-        ]
-        ? 0
-        : 4
-      : 0);
-  const inner_line_vertical_y = -(
-    settings.inner_lines[LineMapping.THICKNESS] / 2
-  );
-  const inner_line_left_x =
-    -inner_line_gap - settings.inner_lines[LineMapping.LENGTH];
-  const inner_line_right_x = inner_line_gap;
-  const inner_line_left_y = inner_line_vertical_y;
-  const inner_line_right_y = inner_line_vertical_y;
-
-  const inner_line_vertical_length = settings.inner_lines[LineMapping.LENGTH];
-  const inner_line_horizontal_length = settings.inner_lines[
-    LineMapping.LENGTH_NOT_LINKED
-  ]
-    ? settings.inner_lines[LineMapping.VERTICAL]
-    : inner_line_vertical_length;
-
-  const inner_line_top_y = -inner_line_gap - inner_line_horizontal_length;
-  const inner_line_bottom_y = inner_line_gap;
-
-  const inner_line_horizontal_x = -(
-    settings.inner_lines[LineMapping.THICKNESS] / 2
-  );
-
-  const outer_line_horizontal_x = -(
-    settings.outer_lines[LineMapping.THICKNESS] / 2
-  );
-  const outer_line_left_x =
-    -outer_line_gap - settings.outer_lines[LineMapping.LENGTH];
-  const outer_line_right_x = outer_line_gap;
-  const outer_line_vertical_y = -(
-    settings.outer_lines[LineMapping.THICKNESS] / 2
-  );
-  const outer_line_left_y = outer_line_vertical_y;
-  const outer_line_right_y = outer_line_vertical_y;
-
-  const outer_line_bottom_y = outer_line_gap;
-
-  const outer_line_vertical_length = settings.outer_lines[LineMapping.LENGTH];
-  const outer_line_horizontal_length = settings.outer_lines[
-    LineMapping.LENGTH_NOT_LINKED
-  ]
-    ? settings.outer_lines[LineMapping.VERTICAL]
-    : outer_line_vertical_length;
-  const outer_line_top_y = -outer_line_gap - outer_line_horizontal_length;
-
-  const center_dot_offset = Math.floor(
-    settings[PrimaryMapping.CENTER_DOT_THICKNESS] / 2
-  );
-
+  const scale = 1.3;
   return (
-    <div className="crosshair grid place-items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" width={200} height={200}>
-        <filter id="constantOpacity2">
-          <feComponentTransfer>
-            <feFuncA
-              type="table"
-              tableValues={`0 ${settings[PrimaryMapping.OUTLINE_OPACITY]} ${
-                settings[PrimaryMapping.OUTLINE_OPACITY]
-              }`}
-            />
-          </feComponentTransfer>
-        </filter>
-        <g
-          style={{ transform: 'translate(50%,50%)' }}
-          stroke="black"
-          strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
-          strokeWidth={0}
-          fill={crosshairColor}
-          filter='url("#constantOpacity")'
-        >
+    <Stage
+      scaleY={scale}
+      scaleX={scale}
+      width={200}
+      height={200}
+      style={{ imageRendering: 'crisp-edges' }}
+    >
+      <Layer>
+        <Group x={100 / scale} y={100 / scale}>
           {settings[PrimaryMapping.CENTER_DOT] ? (
             <RectWithStroke
               x={-center_dot_offset}
@@ -175,12 +150,13 @@ export default function CrosshairDisplay({
               strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
               name="center-dot"
               stroke={settings[PrimaryMapping.OUTLINES]}
+              fill={crosshairColor}
             />
           ) : null}
           {settings.inner_lines[LineMapping.SHOW] &&
           settings.inner_lines[LineMapping.THICKNESS] > 0 ? (
-            <g name="inner-line">
-              <g name="inner-line-vertical">
+            <Group name="inner-line">
+              <Group name="inner-line-vertical">
                 <RectWithStroke
                   x={inner_line_left_x}
                   y={inner_line_left_y}
@@ -191,6 +167,7 @@ export default function CrosshairDisplay({
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
                   name="inner-line-left"
                   stroke={settings[PrimaryMapping.OUTLINES]}
+                  fill={crosshairColor}
                 />
                 <RectWithStroke
                   x={inner_line_right_x}
@@ -202,9 +179,10 @@ export default function CrosshairDisplay({
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
                   name="inner-line-right"
                   stroke={settings[PrimaryMapping.OUTLINES]}
+                  fill={crosshairColor}
                 />
-              </g>
-              <g name="inner-line-horizontal">
+              </Group>
+              <Group name="inner-line-horizontal">
                 <RectWithStroke
                   x={inner_line_horizontal_x}
                   y={inner_line_top_y}
@@ -215,6 +193,7 @@ export default function CrosshairDisplay({
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
                   name="inner-line-top"
                   stroke={settings[PrimaryMapping.OUTLINES]}
+                  fill={crosshairColor}
                 />
                 <RectWithStroke
                   x={inner_line_horizontal_x}
@@ -226,16 +205,18 @@ export default function CrosshairDisplay({
                   strokeOpacity={settings[PrimaryMapping.OUTLINE_OPACITY]}
                   name="inner-line-bottom"
                   stroke={settings[PrimaryMapping.OUTLINES]}
+                  fill={crosshairColor}
                 />
-              </g>
-            </g>
+              </Group>
+            </Group>
           ) : null}
 
           {settings.outer_lines[LineMapping.SHOW] &&
           settings.outer_lines[LineMapping.THICKNESS] > 0 ? (
-            <g name="outer-line">
-              <g name="outer-line-vertical">
+            <Group name="outer-line">
+              <Group name="outer-line-vertical">
                 <RectWithStroke
+                  fill={crosshairColor}
                   x={outer_line_left_x}
                   y={outer_line_left_y}
                   width={outer_line_vertical_length}
@@ -247,6 +228,7 @@ export default function CrosshairDisplay({
                   stroke={settings[PrimaryMapping.OUTLINES]}
                 />
                 <RectWithStroke
+                  fill={crosshairColor}
                   x={outer_line_right_x}
                   y={outer_line_right_y}
                   width={outer_line_vertical_length}
@@ -257,9 +239,10 @@ export default function CrosshairDisplay({
                   name="outer-line-right"
                   stroke={settings[PrimaryMapping.OUTLINES]}
                 />
-              </g>
+              </Group>
               <g name="outer-line-horizontal">
                 <RectWithStroke
+                  fill={crosshairColor}
                   x={outer_line_horizontal_x}
                   y={outer_line_top_y}
                   width={settings.outer_lines[LineMapping.THICKNESS]}
@@ -271,6 +254,7 @@ export default function CrosshairDisplay({
                   stroke={settings[PrimaryMapping.OUTLINES]}
                 />
                 <RectWithStroke
+                  fill={crosshairColor}
                   x={outer_line_horizontal_x}
                   y={outer_line_bottom_y}
                   width={settings.outer_lines[LineMapping.THICKNESS]}
@@ -282,10 +266,10 @@ export default function CrosshairDisplay({
                   stroke={settings[PrimaryMapping.OUTLINES]}
                 />
               </g>
-            </g>
+            </Group>
           ) : null}
-        </g>
-      </svg>
-    </div>
+        </Group>
+      </Layer>
+    </Stage>
   );
 }

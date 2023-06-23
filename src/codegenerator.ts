@@ -208,9 +208,7 @@ export function generateCrosshairFromCode(code: string, withName = false) {
   }
 
   if (!!parts.indexOf('NAME')) {
-    console.log(code);
     const name = parts[parts.indexOf('NAME') + 1];
-    console.log(name);
     settings.name = name;
   }
 
@@ -258,6 +256,10 @@ export function generateCrosshairFromCode(code: string, withName = false) {
 
 export function generateCrosshair(s: CrosshairSettings, withName = false) {
   if (isEqual(s, DEFAULT_SETTINGS)) {
+    if (withName) {
+      return '0;NAME;' + s.name;
+    }
+
     return '0';
   }
 
@@ -509,7 +511,6 @@ export function generateCrosshair(s: CrosshairSettings, withName = false) {
   }
 
   if (withName) {
-    console.log(s.name);
     code += 'NAME;' + s.name;
   }
 
