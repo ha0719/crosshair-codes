@@ -11,7 +11,9 @@ export default function SettingRow({
 }) {
   return (
     <div
-      className={`setting-row flex ${odd && 'odd'} ${noHover && 'no-hover'}`}
+      className={`setting-row flex flex-col lg:flex-row ${odd && 'odd'} ${
+        noHover && 'no-hover'
+      }`}
     >
       <div className="setting-label flex flex-1 items-center ">
         <div className="ml-5">{label}</div>

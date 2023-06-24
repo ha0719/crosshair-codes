@@ -252,7 +252,7 @@ export default function CrosshairCanvas({
                   />
                 ) : null}
               </Group>
-              <g name="outer-line-horizontal">
+              <Group name="outer-line-horizontal">
                 {outer_line_horizontal_length > 0 ? (
                   <RectWithStroke
                     fill={crosshairColor}
@@ -282,7 +282,7 @@ export default function CrosshairCanvas({
                     stroke={settings[PrimaryMapping.OUTLINES]}
                   />
                 ) : null}
-              </g>
+              </Group>
             </Group>
           ) : null}
         </Group>
