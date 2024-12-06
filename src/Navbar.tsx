@@ -1,39 +1,37 @@
-import GitHubButton from 'react-github-btn';
+import { Link, useLocation } from 'react-router-dom';
 
-export function Navbar({
-  selectedTab,
-  setSelectedTab,
-}: {
-  selectedTab: number;
-  setSelectedTab: (tab: number) => void;
-}) {
+function Navbar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
-    <div className="navbar">
-      <ul>
-        {['Editor', 'Browse'].map((n, i) => {
-          return (
-            <li
-              onClick={() => setSelectedTab(i)}
-              key={n}
-              className={selectedTab === i ? 'selected' : ''}
+    <div className="flex flex-col">
+      <div 
+        className="flex items-center justify-between px-4 py-2 bg-gray-800">
+        <div className="flex items-center space-x-8">
+          <h1 className="text-white text-xl font-bold">无畏契约准星生成器</h1>
+          <div className="flex space-x-4">
+            <Link
+              to="/"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${
+                currentPath === '/' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+              }`}
             >
-              <a href="#">{n}</a>
-            </li>
-          );
-        })}
-        <li>
-          <GitHubButton
-            href="https://github.com/genesy/crosshair-codes"
-            data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-            data-icon="octicon-star"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star genesy/crosshair-codes on GitHub"
-          >
-            Star
-          </GitHubButton>
-        </li>
-      </ul>
+              EDITOR
+            </Link>
+            <Link
+              to="/BROWSE"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${
+                currentPath === '/BROWSE' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+              }`}
+            >
+              BROWSE
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default Navbar;
