@@ -2,7 +2,7 @@ import CrosshairDisplay from './CrosshairDisplay/CrosshairDisplay';
 import { generateCrosshairFromCode } from './codegenerator';
 import SAMPLE_CROSSHAIRS from './samplecrosshairs';
 
-export function BrowsePage() {
+export default function Browse() {
   return (
     <div className="grid grid-cols-5">
       {SAMPLE_CROSSHAIRS.map((code) => {
@@ -17,9 +17,16 @@ export function BrowsePage() {
               <div
                 className="icon-btn export"
                 onClick={() => {
-                  // const code = generateCrosshair(settings);
-                  navigator.clipboard.writeText(code);
-                  // setShowCopyTooltip(true);
+                  const textArea = document.createElement('textarea');
+                  textArea.value = code;
+                  document.body.appendChild(textArea);
+                  textArea.select();
+                  try {
+                    document.execCommand('copy');
+                  } catch (err) {
+                    console.error('Failed to copy', err);
+                  }
+                  document.body.removeChild(textArea);
                 }}
               >
                 <span className="material-symbols-outlined">upload</span>
